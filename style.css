@@ -15,7 +15,6 @@ body {
     font-family: 'Fira Code', sans-serif;
     background-color: #050743;
     color: #f1f1f1;
-    position: relative;
 }
 
 body.menu-open {
@@ -92,8 +91,8 @@ nav{
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
     background-color: #b799ff;
     z-index: 9;
     transform: translateX(100%);
@@ -133,36 +132,29 @@ nav{
 /* Header */
 
 header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 100%;
     text-align: center;
-    position: relative;
+    background-image: url('images/profileWithoutBG.png');
+    background-size: 110%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    padding-top: 80px;
+    height: 100vh;
 }
 
 .header-content {
     color: #f1f1f1;
     padding: 2em;
-    position: absolute;
-    right: 0;
-    bottom: 0;
     background-color: #b799ff;
     width: 100%;
+    height: 40vh;
+    margin-top: calc(60vh - 80px);
 }
 
 header h1{
     font-size: 3rem;
     text-transform: uppercase;
-}
-
-.profile-image {
-    max-height: 90%;
-    position: absolute;
-    left: 0;
-    bottom: -5%;
-    z-index: -10;
 }
 
 .cta{
@@ -171,7 +163,7 @@ header h1{
     color: #050743;
     padding: 0.5em 1em;
     font-weight: bold;
-    margin-top: 1em;
+    margin-top: 2em;
     display: inline-block;
     text-transform: uppercase;
     clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
@@ -184,8 +176,14 @@ header h1{
 }
 
 /* Sections */
-section {
-    height: 100%;
+#about{
+    background-color: #b799ff;
+    height: 50vh;
+}
+
+#projects{
+    background-color: #050743;
+    height: 50vh;
 }
 
 /* Footer */
@@ -195,8 +193,8 @@ footer{
     height: 100px;
     text-align: center;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     margin: 0;
 }
 

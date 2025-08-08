@@ -10,47 +10,40 @@
     <script src="https://kit.fontawesome.com/dda30c13f2.js" crossorigin="anonymous" defer></script>
 </head>
 <body>
-    <div data-scroll-container>
         <nav>
             <div class="logo-container"><a href="#">&lt;JD&gt;</a></div>
             <button class="hamburger" aria-label="Menu"><i class="color-primary fa-solid fa-bars"></i><i class="color-primary fa-solid fa-xmark"></i></button>
             <ul class="nav-links">
                 <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="#about"><i class="fa-solid fa-user"></i> About me</a></li>
+                <li><a href="#projects"><i class="fa-solid fa-envelope"></i> Projects</a></li>
                 <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
-        <header data-scroll-section>
-            <img src="images/profileWithoutBG.png" alt="Image of Jordi Dijkstra" class="profile-image" data-scroll data-scroll-speed="2">
-            <div class="header-content ">
+
+        <header>
+            <div class="header-content">
                 <h1>Jordi Dijkstra</h1>
                 <h2>Full-stack Webdeveloper</h2>
                 <a href="#about" class="cta">More about me</a>
             </div>
         </header>
-        <section data-scroll-section id="about">
+
+        <section id="about">
             
         </section>
-        <section data-scroll-section id="contact">
+
+        <section id="projects">
             
         </section>
+
+        <section id="contact">
+            
+        </section>
+
         <footer>
             <p>&copy; 2025 Jordi Dijkstra Portfolio</p>
         </footer>
-    </div>
-    <script src="js/locomotive-scroll.min.js"></script>
-    <script>
-        const scroll = new LocomotiveScroll({
-            el: document.querySelector("[data-scroll-container]"),
-            smooth: true,
-            smartphone: {
-                smooth: true
-            },
-            tablet: {
-                smooth: true
-            }
-        });
-    </script>
     <script src="js/script.js"></script>
 </body>
 </html>
