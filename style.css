@@ -129,18 +129,35 @@ nav{
     transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
 }
 
+/* Parallax */
+.parallax-container {
+    position: relative;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    perspective: 10px;
+}
+
 /* Header */
 
 header {
-    max-width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
     text-align: center;
-    background-image: url('images/profileWithoutBG.png');
-    background-size: 110%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: scroll;
-    padding-top: 80px;
-    height: 100vh;
+}
+
+.profile-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateZ(-10px) scale(2);
+    z-index: -1;
 }
 
 .header-content {
@@ -149,7 +166,7 @@ header {
     background-color: #b799ff;
     width: 100%;
     height: 40vh;
-    margin-top: calc(60vh - 80px);
+    margin-top: 60vh;
 }
 
 header h1{
@@ -176,14 +193,18 @@ header h1{
 }
 
 /* Sections */
+section {
+    position: relative;
+    z-index: 1;
+}
+
 #about{
     background-color: #b799ff;
-    height: 50vh;
+   
 }
 
 #projects{
     background-color: #050743;
-    height: 50vh;
 }
 
 /* Footer */
