@@ -1,6 +1,3 @@
-html, body {
-    height: 100%;
-}
 *{
     margin: 0;
     padding: 0;
@@ -133,9 +130,36 @@ nav{
 .parallax-container {
     position: relative;
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     perspective: 10px;
+}
+
+/* Moving bike */
+#bike {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    font-size: 60px;
+    transition: transform 0.05s linear;
+    transform: rotate(90deg);
+    z-index: 10;
+}
+
+#bike-track{
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 5px;
+    background-color: #a2faa3;
+    transition: height 0.05s linear;
+    z-index: 10;
+}
+
+#bike-icon {
+    font-size: 3rem;
+    color: #a2faa3;
+    transition: transform 0.05s linear;
 }
 
 /* Header */
@@ -196,11 +220,35 @@ header h1{
 section {
     position: relative;
     z-index: 1;
+    padding-top: 120px;
+}
+
+section h2 {
+    font-size: 2.5em;
+    padding: 1em 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+section p {
+    padding: 2em 3em;
+    line-height: 1.6;
+    font-size: 1.5em;
+}
+
+.about-image {
+    width: 100vw;
+    height: 200px;
+    padding: 2em 0;
+    background: url('images/profileWithoutBG.png') no-repeat center top;
+    background-size: 50%;
+    background-color: #b799ff;
+    margin: 0 auto;
+    clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
+    -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
 }
 
 #about{
-    background-color: #b799ff;
-   
+    background-color: #050743;
 }
 
 #projects{
@@ -217,6 +265,7 @@ footer{
     align-items: center;
     justify-content: center;
     margin: 0;
+    z-index: 10;
 }
 
 /* Color Classes */
