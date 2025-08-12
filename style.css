@@ -140,7 +140,6 @@ nav{
     position: fixed;
     top: 80px;
     left: 0;
-    font-size: 60px;
     transition: transform 0.05s linear;
     transform: rotate(90deg);
     z-index: 10;
@@ -157,7 +156,7 @@ nav{
 }
 
 #bike-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #a2faa3;
     transition: transform 0.05s linear;
 }
@@ -252,7 +251,62 @@ section p {
 }
 
 #projects{
-    background-color: #050743;
+    background-color: #b799ff;
+    padding-bottom: 2em;
+}
+
+.projects-lists{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-item{
+    background-color: #a2faa3;
+    padding: 2em;
+    clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
+    -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
+    transition: transform 0.3s;
+    width: 80%;
+    aspect-ratio: 1/1;
+    margin: 2em auto;
+    text-align: center;
+    color: #050743;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+.project-item h3,
+.project-item p {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.project-item:hover h3,
+.project-item:hover p,
+.project-item:focus-within h3,
+.project-item:focus-within p {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.project-item h3{
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.project-item p{
+    font-size: 1.5em;
+    padding: 1em;
+}
+
+.project-item:hover{
 }
 
 /* Footer */
