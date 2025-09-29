@@ -12,7 +12,32 @@ document.addEventListener('DOMContentLoaded', function() {
             hamburger.classList.toggle('open');
             body.classList.toggle('menu-open', navLinks.classList.contains('open'));
         });
+        
+        // Sluit menu wanneer er op een navigatielink wordt geklikt
+        const navLinksElements = navLinks.querySelectorAll('a');
+        navLinksElements.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('open');
+                hamburger.classList.remove('open');
+                body.classList.remove('menu-open');
+            });
+        });
     }
+    
+    // Project items klikbaar maken
+    const projectItems = document.querySelectorAll('.project-item[data-url]');
+    projectItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            if (url && url !== '#') {
+                window.open(url, '_blank');
+            }
+        });
+        
+        // Voeg cursor pointer toe voor visuele feedback
+        item.style.cursor = 'pointer';
+    });
+    
     function moveBike() {
         const scrollTop = container.scrollTop;
         const footer = document.querySelector('footer');
@@ -22,12 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollPercent = Math.min(scrollTop / docHeight, 1);
         // maximale verplaatsing: container hoogte - bike hoogte - start offset - footer
         const bikeHeight = bike.offsetHeight;
-        const startOffset = 80;
+        const startOffset = 60;
         const maxTop = container.clientHeight - bikeHeight - startOffset - footerHeight;
         // positie fiets op basis van scrollpercentage
         const bikeTop = startOffset + scrollPercent * maxTop;
         bike.style.top = `${bikeTop}px`;
-        bikeTrack.style.height = `${bikeTop}px`;
+        bikeTrack.style.height = `${bikeTop-18}px`;
     }
     container.addEventListener('scroll', moveBike);
     window.addEventListener('resize', moveBike);
