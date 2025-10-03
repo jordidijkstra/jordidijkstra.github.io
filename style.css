@@ -188,8 +188,8 @@ header {
     padding: 2em;
     background-color: #b799ff;
     width: 100%;
-    height: 40vh;
-    margin-top: 60vh;
+    height: 40dvh;
+    margin-top: 60dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -298,18 +298,12 @@ section p {
 }
 .project-item h3,
 .project-item p {
-    opacity: 0;
+    position: relative;
+    z-index: 2;
+    color: #f1f1f1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     pointer-events: none;
-    transition: opacity 0.3s;
 }
-.project-item:hover h3,
-.project-item:hover p,
-.project-item:focus-within h3,
-.project-item:focus-within p {
-    opacity: 1;
-    pointer-events: auto;
-}
-
 
 .project-item h3{
     font-size: 1.8em;
@@ -319,6 +313,30 @@ section p {
 .project-item p{
     font-size: .7em;
     padding: 1em;
+}
+
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(5, 7, 67, 0);
+    transition: background-color 0.3s ease;
+    z-index: 1;
+}
+
+.project-item:hover,
+.project-item:focus-within,
+.project-item:active {
+    background-size: 300%;
+}
+
+.project-item::before,
+.project-item::before,
+.project-item::before {
+    background-color: rgba(5, 7, 67, 0.7);
 }
 
 .joshuaenlyke{
@@ -331,38 +349,6 @@ section p {
     overflow: hidden;
     /* Maak het element focusbaar voor mobile */
     -webkit-tap-highlight-color: transparent;
-}
-
-.joshuaenlyke::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(5, 7, 67, 0);
-    transition: background-color 0.3s ease;
-    z-index: 1;
-}
-
-.joshuaenlyke:hover,
-.joshuaenlyke:focus-within,
-.joshuaenlyke:active {
-    background-size: 300%;
-}
-
-.joshuaenlyke:hover::before,
-.joshuaenlyke:focus-within::before,
-.joshuaenlyke:active::before {
-    background-color: rgba(5, 7, 67, 0.7);
-}
-
-.joshuaenlyke h3,
-.joshuaenlyke p {
-    position: relative;
-    z-index: 2;
-    color: #f1f1f1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 /* Footer */
