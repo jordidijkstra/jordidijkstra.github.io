@@ -234,9 +234,23 @@ section {
 
 section h2 {
     font-size: 2.5em;
-    padding: 1em 0;
+    padding: 1em 0 0.5em 0;
     text-transform: uppercase;
     text-align: center;
+    position: relative;
+    margin-bottom: 1.5em;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 5px;
+    background:  white;
+    border-radius: 3px;
 }
 section p {
     padding: 1.5em 3em;
@@ -264,6 +278,7 @@ section p {
 #about{
     background-color: #050743;
     padding-bottom: 3em;
+    text-align: center;
 }
 
 #skills {
@@ -315,7 +330,6 @@ section p {
 }
 
 .skill-badge:hover {
-    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(183, 153, 255, 0.5);
     scale: 1.05;
 }
@@ -408,11 +422,9 @@ section p {
 .project-item.animate-in h3,
 .project-item.animate-in p {
     opacity: 1;
-    transform: translateY(0) scale(1);
 }
 
 .project-item:hover {
-    transform: translateY(-10px) scale(1.02);
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.4),
         0 8px 20px rgba(183, 153, 255, 0.3),
@@ -423,9 +435,6 @@ section p {
 
 
 /* Touch-friendly effects for mobile */
-.project-item:active {
-    transform: translateY(-5px) scale(0.98);
-}
 .project-item h3,
 .project-item p {
     position: relative;
@@ -439,7 +448,7 @@ section p {
     font-size: 1.6em;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.5em;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
@@ -447,11 +456,10 @@ section p {
 
 .project-item p{
     font-size: 1em;
-    line-height: 1.4;
     color: white;
     font-weight: 300;
-    margin-bottom: 0.5em;
-    padding: 0.5em;
+    margin-bottom: 0;
+    padding: 0.5em 0.5em 0;
     text-shadow: 
         1px 1px 2px rgba(0, 0, 0, 0.8),
         0 0 8px rgba(162, 250, 163, 0.3);
@@ -509,7 +517,6 @@ section p {
 .project-item:hover .tech-badge {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.4);
-    transform: translateX(-3px);
     box-shadow: 
         -4px 0 12px rgba(0, 0, 0, 0.4),
         inset 2px 0 0 rgba(255, 255, 255, 0.3);
@@ -600,8 +607,121 @@ section p {
 
 #contact{
     background-color: #e26060;
-    padding-bottom: 3em;
 }
+
+/* Contact Form Styling */
+.contact-container {
+    max-width: 100%;
+    padding: 0 2em;
+}
+
+.contact-form {
+    background: linear-gradient(135deg, rgba(183, 153, 255, 0.1), rgba(162, 250, 163, 0.1));
+    backdrop-filter: blur(10px);
+    padding: 2.5em;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+#contact p{
+    text-align: center;
+}
+
+#contact h2{
+    margin-bottom: 0;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Social Links Styling */
+.social-links {
+    padding: 2em 1em;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.social-links h3 {
+    color: #f1f1f1;
+    margin-bottom: 1.5em;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: center;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}
+
+.social-icon.linkedin {
+    background: linear-gradient(135deg, #0077b5, #005885);
+    color: white;
+    border: 2px solid #0077b5;
+    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+}
+
+.social-icon.linkedin:hover {
+    background: linear-gradient(135deg, #005885, #004066);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.5);
+}
+
+.social-icon.github {
+    background: linear-gradient(135deg, #333, #1a1a1a);
+    color: white;
+    border: 2px solid #333;
+    box-shadow: 0 4px 15px rgba(51, 51, 51, 0.3);
+}
+
+.social-icon.github:hover {
+    background: linear-gradient(135deg, #1a1a1a, #000);
+    box-shadow: 0 8px 25px rgba(51, 51, 51, 0.5);
+}
+
+.social-icon i {
+    font-size: 1.5em;
+    width: 30px;
+}
+
+.social-icon span {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 
 /* Footer */
 
@@ -613,7 +733,8 @@ footer{
     align-items: center;
     justify-content: center;
     margin: 0;
-    z-index: 10;
+    position: static;
+    width: 100%;
 }
 
 /* Responsive Design - Mobile First Approach */
