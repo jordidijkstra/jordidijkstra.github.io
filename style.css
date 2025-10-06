@@ -263,56 +263,121 @@ section p {
 
 #about{
     background-color: #050743;
+    padding-bottom: 3em;
 }
 
-#projects{
+#skills {
     background-color: #b799ff;
+    padding-bottom: 3em;
+}
+
+.skills-container {
+    padding: 0 2em;
+    width: 100%;
+}
+
+.skill-category {
+    margin: 0 auto;
+    margin-bottom: 3em;
+    text-align: center;
+    max-width: 80%;
+}
+
+.skill-category h3 {
+    font-size: 1.5em;
+    color: white;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.skill-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+}
+
+.skill-badge {
+    background: linear-gradient(135deg, #b799ff, #a2faa3);
+    color: #050743;
+    padding: 0.8em 1.5em;
+    clip-path: polygon(5% 0%, 100% 0%, 100% 85%, 95% 100%, 0% 100%, 0% 15%);
+    -webkit-clip-path: polygon(5% 0%, 100% 0%, 100% 85%, 95% 100%, 0% 100%, 0% 15%);
+    font-weight: bold;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(183, 153, 255, 0.3);
+}
+
+.skill-badge:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(183, 153, 255, 0.5);
+    scale: 1.05;
+}
+
+.skill-badge i {
+    font-size: 1.2em;
+}
+
+/* Specifieke kleuren voor verschillende skill badges */
+.skill-badge.html { background: linear-gradient(135deg, #e34f26, #ff6b4a); }
+.skill-badge.css { background: linear-gradient(135deg, #1572b6, #42a5f5); }
+.skill-badge.js { background: linear-gradient(135deg, #f7df1e, #ffeb3b); }
+.skill-badge.react { background: linear-gradient(135deg, #61dafb, #21d4fd); }
+.skill-badge.vue { background: linear-gradient(135deg, #4fc08d, #42b883); }
+.skill-badge.node { background: linear-gradient(135deg, #339933, #68bb59); }
+.skill-badge.python { background: linear-gradient(135deg, #3776ab, #4f94cd); }
+.skill-badge.csharp { background: linear-gradient(135deg, #239120, #68217a); color: #f1f1f1; }
+.skill-badge.aspnet-core { background: linear-gradient(135deg, #512bd4, #7c3aed); color: #f1f1f1; }
+.skill-badge.aspnet-mvc { background: linear-gradient(135deg, #0078d4, #106ebe); color: #f1f1f1; }
+.skill-badge.entity-framework { background: linear-gradient(135deg, #ff6b35, #f7931e); color: #f1f1f1; }
+.skill-badge.blazor { background: linear-gradient(135deg, #512bd4, #8b5cf6); color: #f1f1f1; }
+.skill-badge.sql-server { background: linear-gradient(135deg, #cc2927, #e74c3c); color: #f1f1f1; }
+.skill-badge.rest-api { background: linear-gradient(135deg, #61dafb, #21d4fd); color: #050743; }
+.skill-badge.php { background: linear-gradient(135deg, #777bb4, #8892bf); }
+.skill-badge.database { background: linear-gradient(135deg, #336791, #5b9bd5); }
+.skill-badge.git { background: linear-gradient(135deg, #f05032, #ff6b4a); }
+.skill-badge.github { background: linear-gradient(135deg, #333, #666); color: #f1f1f1; }
+.skill-badge.figma { background: linear-gradient(135deg, #f24e1e, #ff7262); }
+.skill-badge.responsive { background: linear-gradient(135deg, #a2faa3, #b799ff); }
+
+#projects{
+    background-color: #050743;
     padding-bottom: 2em;
 }
 
 .projects-lists{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    padding: 0 1em;
 }
 
 .project-item{
-    background-color: #a2faa3;
+    background: linear-gradient(135deg, rgba(162, 250, 163, 0.1), rgba(183, 153, 255, 0.1));
+    backdrop-filter: blur(10px);
+    clip-path: polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%);
+    -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%);
     padding: 2em;
-    clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
-    -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
-    transition: transform 0.3s;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: 80%;
     aspect-ratio: 1/1;
-    margin: 2em auto;
+    margin: 1.5em auto;
+    min-height: 220px;
     text-align: center;
-    color: #050743;
+    color: #f1f1f1;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     position: relative;
-}
-.project-item h3,
-.project-item p {
-    position: relative;
-    z-index: 2;
-    color: #f1f1f1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    pointer-events: none;
-}
-
-.project-item h3{
-    font-size: 1.8em;
-    text-transform: uppercase;
-}
-
-.project-item p{
-    font-size: .7em;
-    padding: 1em;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(162, 250, 163, 0.1);
 }
 
 .project-item::before {
@@ -322,7 +387,183 @@ section p {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(5, 7, 67, 0);
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    transition: all 0.5s ease-in-out;
+    z-index: 1;
+}
+
+/* Scroll animation states */
+.project-item {
+    opacity: 1;
+}
+
+.project-item.animate-in::before {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    backdrop-filter: blur(10px);
+    transition: all 0.5s ease-in-out;
+}
+
+.project-item.animate-in h3,
+.project-item.animate-in p {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.project-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 8px 20px rgba(183, 153, 255, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-color: rgba(183, 153, 255, 0.3);
+}
+
+
+
+/* Touch-friendly effects for mobile */
+.project-item:active {
+    transform: translateY(-5px) scale(0.98);
+}
+.project-item h3,
+.project-item p {
+    position: relative;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.project-item h3{
+    font-size: 1.6em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.8em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+.project-item p{
+    font-size: 1em;
+    line-height: 1.4;
+    color: white;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.8),
+        0 0 8px rgba(162, 250, 163, 0.3);
+}
+
+.project-item:hover h3 {
+    color: #a2faa3;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(162, 250, 163, 0.3);
+}
+
+.project-item:hover p {
+    color: #f1f1f1;
+    opacity: 1;
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.5),
+        0 0 12px rgba(162, 250, 163, 0.5),
+        0 0 20px rgba(162, 250, 163, 0.2);
+}
+
+/* Project Tech Badges */
+.project-tech {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 1em;
+    right: 0;
+    gap: 0.4em;
+    z-index: 3;
+}
+
+.tech-badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: #f1f1f1;
+    padding: 0.4em;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    box-shadow: 
+        -2px 0 8px rgba(0, 0, 0, 0.3),
+        inset 1px 0 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+}
+
+.project-item:hover .tech-badge {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-3px);
+    box-shadow: 
+        -4px 0 12px rgba(0, 0, 0, 0.4),
+        inset 2px 0 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Specific colors for tech badges */
+.tech-badge.html { 
+    background: linear-gradient(270deg, rgba(227, 79, 38, 0.9), rgba(255, 107, 74, 0.7));
+    border-color: rgba(227, 79, 38, 0.6);
+    box-shadow: 
+        -2px 0 8px rgba(227, 79, 38, 0.3),
+        inset 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.tech-badge.css { 
+    background: linear-gradient(270deg, rgba(21, 114, 182, 0.9), rgba(66, 165, 245, 0.7));
+    border-color: rgba(21, 114, 182, 0.6);
+    box-shadow: 
+        -2px 0 8px rgba(21, 114, 182, 0.3),
+        inset 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.tech-badge.js { 
+    background: linear-gradient(270deg, rgba(247, 223, 30, 0.9), rgba(255, 235, 59, 0.7));
+    border-color: rgba(247, 223, 30, 0.6);
+    color: #050743;
+    box-shadow: 
+        -2px 0 8px rgba(247, 223, 30, 0.3),
+        inset 1px 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.tech-badge.csharp { 
+    background: linear-gradient(270deg, rgba(35, 145, 32, 0.9), rgba(104, 33, 122, 0.7));
+    border-color: rgba(35, 145, 32, 0.6);
+    box-shadow: 
+        -2px 0 8px rgba(35, 145, 32, 0.3),
+        inset 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.tech-badge.aspnet { 
+    background: linear-gradient(270deg, rgba(81, 43, 212, 0.9), rgba(124, 58, 237, 0.7));
+    border-color: rgba(81, 43, 212, 0.6);
+    box-shadow: 
+        -2px 0 8px rgba(81, 43, 212, 0.3),
+        inset 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.project-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     transition: background-color 0.3s ease;
     z-index: 1;
 }
@@ -333,22 +574,33 @@ section p {
     background-size: 300%;
 }
 
-.project-item::before,
-.project-item::before,
-.project-item::before {
-    background-color: rgba(5, 7, 67, 0.7);
-}
-
 .joshuaenlyke{
     background-image: url('images/joshuaenlyke.png');
-    background-size: 240%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: background-size 0.3s ease;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
     /* Maak het element focusbaar voor mobile */
     -webkit-tap-highlight-color: transparent;
+}
+
+.codepen{
+    background-image: url('images/cssLoadingAnimations.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    /* Maak het element focusbaar voor mobile */
+    -webkit-tap-highlight-color: transparent;
+}
+
+#contact{
+    background-color: #e26060;
+    padding-bottom: 3em;
 }
 
 /* Footer */
@@ -362,6 +614,42 @@ footer{
     justify-content: center;
     margin: 0;
     z-index: 10;
+}
+
+/* Responsive Design - Mobile First Approach */
+
+/* Tablet responsive design */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .projects-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2em;
+        padding: 0 2em;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .project-item {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+/* Large screens - better grid */
+@media (min-width: 1025px) {
+    .projects-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2em;
+        padding: 0 2em;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .project-item {
+        width: 100%;
+        margin: 0;
+    }
 }
 
 /* Color Classes */

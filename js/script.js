@@ -53,6 +53,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const bikeTop = startOffset + scrollPercent * maxTop;
         bike.style.top = `${bikeTop}px`;
         bikeTrack.style.height = `${bikeTop-18}px`;
+        
+        // Check welke projecten geanimeerd moeten worden op basis van fiets positie
+        checkProjectAnimations(bikeTop);
+    }
+    
+    function checkProjectAnimations(bikeTop) {
+        const projectItems = document.querySelectorAll('.project-item');
+        
+        projectItems.forEach(item => {
+            const itemRect = item.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            // Bereken de absolute positie van het project binnen de container
+            const itemTop = itemRect.top - containerRect.top + container.scrollTop;
+            const itemBottom = itemTop + itemRect.height;
+            const itemCenter = itemTop + (itemRect.height / 2);
+            
+            // Bereken fiets positie relatief tot de container
+            const bikeAbsoluteTop = bikeTop + container.scrollTop;
+            
+            // Animatie start wanneer fiets het project bereikt, stopt wanneer fiets voorbij is
+            if (bikeAbsoluteTop >= itemTop && bikeAbsoluteTop <= itemBottom) {
+                item.classList.add('animate-in');
+            } else {
+                item.classList.remove('animate-in');
+            }
+        });
     }
     container.addEventListener('scroll', moveBike);
     window.addEventListener('resize', moveBike);
