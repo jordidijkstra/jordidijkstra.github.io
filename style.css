@@ -645,11 +645,18 @@ section p {
     }
 }
 
+/* Contact Section */
+.contact-container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 2em 1em;
+}
+
 /* Social Links Styling */
 .social-links {
     padding: 2em 1em;
     text-align: center;
-    max-width: 80%;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -681,34 +688,17 @@ section p {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+    background: white;
+    color: #e26060;
+    border: 2px solid white;
+    box-shadow: 0 4px 15px rgba(226, 96, 96, 0.5);
 }
 
 .social-icon:hover {
     transform: translateY(-3px);
-}
-
-.social-icon.linkedin {
-    background: linear-gradient(135deg, #0077b5, #005885);
+    background: linear-gradient(135deg, #e26060, #c54545);
     color: white;
-    border: 2px solid #0077b5;
-    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
-}
-
-.social-icon.linkedin:hover {
-    background: linear-gradient(135deg, #005885, #004066);
-    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.5);
-}
-
-.social-icon.github {
-    background: linear-gradient(135deg, #333, #1a1a1a);
-    color: white;
-    border: 2px solid #333;
-    box-shadow: 0 4px 15px rgba(51, 51, 51, 0.3);
-}
-
-.social-icon.github:hover {
-    background: linear-gradient(135deg, #1a1a1a, #000);
-    box-shadow: 0 8px 25px rgba(51, 51, 51, 0.5);
+    box-shadow: 0 8px 25px rgba(226, 96, 96, 0.5);
 }
 
 .social-icon i {
@@ -722,19 +712,17 @@ section p {
     letter-spacing: 1px;
 }
 
-
 /* Footer */
 
 footer{
-    background-color: #b799ff;
+    background-color: #050743;
     height: 100px;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
-    position: static;
-    width: 100%;
+    z-index: 10;
 }
 
 /* Responsive Design - Mobile First Approach */
