@@ -249,7 +249,7 @@ section h2::after {
     transform: translateX(-50%);
     width: 60px;
     height: 5px;
-    background:  white;
+    background:  #e8e8e8;
     border-radius: 3px;
 }
 section p {
@@ -283,7 +283,6 @@ section p {
 
 #skills {
     background-color: #b799ff;
-    padding: 3em 0;
     overflow: hidden;
 }
 
@@ -317,7 +316,7 @@ section p {
 
 .slide-content {
     text-align: center;
-    color: white;
+    color: #e8e8e8;
 }
 
 .slide-content h3 {
@@ -331,7 +330,7 @@ section p {
     font-size: 1.1em;
     margin-bottom: 2em;
     padding: 0;
-    color: white;
+    color: #e8e8e8;
 }
 
 .skill-items {
@@ -383,7 +382,7 @@ section p {
 
 .carousel-btn {
     background: #050743;
-    color: white;
+    color: #e8e8e8;
     border: none;
     width: 50px;
     height: 50px;
@@ -531,14 +530,14 @@ section p {
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 0.5em;
-    color: white;
+    color: #e8e8e8;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     letter-spacing: 1px;
 }
 
 .project-item p{
     font-size: 1em;
-    color: white;
+    color: #e8e8e8;
     font-weight: 300;
     margin-bottom: 0;
     padding: 0.5em 0.5em 0;
@@ -749,16 +748,16 @@ section p {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background: white;
+    background: #e8e8e8;
     color: #e26060;
-    border: 2px solid white;
+    border: 2px solid #e8e8e8;
     box-shadow: 0 4px 15px rgba(226, 96, 96, 0.5);
 }
 
 .social-icon:hover {
     transform: translateY(-3px);
     background: linear-gradient(135deg, #e26060, #c54545);
-    color: white;
+    color: #e8e8e8;
     box-shadow: 0 8px 25px rgba(226, 96, 96, 0.5);
 }
 
@@ -776,7 +775,7 @@ section p {
 /* Footer */
 
 footer{
-    background-color: #050743;
+    background-color: #e26060;
     height: 100px;
     text-align: center;
     display: flex;
@@ -788,8 +787,136 @@ footer{
 
 /* Responsive Design - Mobile First Approach */
 
-/* Tablet responsive design */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Sticky sections for tablets and larger screens */
+@media (min-width: 769px) {
+    
+/* Parallax */
+.parallax-container {
+    position: relative;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    perspective: 10px;
+}
+
+/* Moving bike */
+#bike {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    transition: transform 0.05s linear;
+    transform: rotate(90deg);
+    z-index: 10;
+}
+
+#bike-track{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 5px;
+    background-color: #a2faa3;
+    transition: height 0.05s linear;
+    z-index: 10;
+}
+
+#bike-icon {
+    font-size: 2rem;
+    color: #a2faa3;
+    transition: transform 0.05s linear;
+}
+
+    section, header {
+        position: sticky;
+        top: 0;
+        height: 100dvh;
+        max-height: 100dvh;
+        z-index: 1;
+    }
+
+    .profile-image {
+        position: absolute;
+        left: -100px;
+        bottom: -70px;
+        height: 80%;
+        width: auto;
+        transform: none;
+    }
+
+    .header-content {
+        position: absolute;
+        background-color: transparent;
+        width: 60%;
+        right: 0;
+        height: 40dvh;
+        margin-top: 20dvh;
+    }
+
+    .header-content h1{
+        font-size: 3rem;
+        padding-top: .5em;
+    }
+
+    .header-content h2{
+        font-size: 1.5rem;
+        padding-bottom: 1.5em;
+    }
+
+    .cta{
+        font-size: 1.2em;
+    }
+
+    #about, #projects{
+        background-color: #b799ff;
+    }
+
+    #skills{
+        background-color: #050743;
+    }
+
+    .about-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 2em 0;
+    }
+
+    .about-image {
+        width: 50%;
+        min-height: 27dvh;
+        padding: 0;
+        margin: 0;
+        background-position: 50% 23px;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
+        -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
+    }
+
+    #about p{
+        width: 50%;
+        margin: 0;
+        text-align: left;
+        font-size: 1.2em;
+    }
+
+    .first-alinea{
+        color: #050743 !important;
+    }
+
+    .second-alinea{
+        background-color: #050743;
+    }
+
+    .highlighted {
+        width: 100%;
+        background-color: #e8e8e8;
+        display: flex;
+    }
+
+    .non-highlighted{
+        min-height: 50dvh;
+        display: flex;
+    }
+
     .projects-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
