@@ -264,15 +264,14 @@ section p {
 }
 
 .about-image {
-    width: 80vw;
-    height: 200px;
-    padding: 2em 0;
-    background: url('images/aboutMeImageWithoutBG.png') no-repeat center 20%;
-    background-size: 60%;
-    background-color: #a2faa3;
+    width: 100%;
+    padding: 1em 0 ;
+}
+
+.about-image img {
+    width: 80%;
+    height: auto;
     margin: 0 auto;
-    clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
-    -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
 }
 
 #about{
@@ -362,6 +361,7 @@ section p {
 
 .skill-item i {
     font-size: 2.5em;
+    color: #e8e8e8;
 }
 
 .skill-item span {
@@ -377,7 +377,7 @@ section p {
     align-items: center;
     justify-content: center;
     gap: 2em;
-    margin-top: 2em;
+    margin: 2em 0;
 }
 
 .carousel-btn {
@@ -430,18 +430,6 @@ section p {
 .dot:hover {
     background: rgba(162, 250, 163, 0.7);
 }
-
-/* Skill Item Colors */
-.skill-item.html i { color: #e34f26; }
-.skill-item.css i { color: #1572b6; }
-.skill-item.js i { color: #f7df1e; }
-.skill-item.csharp i { color: #239120; }
-.skill-item.aspnet-core i { color: #512bd4; }
-.skill-item.blazor i { color: #8b5cf6; }
-.skill-item.sql-server i { color: #cc2927; }
-.skill-item.git i { color: #f05032; }
-.skill-item.github i { color: #666; }
-.skill-item.rest-api i { color: #61dafb; }
 
 #projects{
     background-color: #050743;
@@ -775,7 +763,7 @@ section p {
 /* Footer */
 
 footer{
-    background-color: #e26060;
+    background-color: #b799ff;
     height: 100px;
     text-align: center;
     display: flex;
@@ -789,41 +777,30 @@ footer{
 
 /* Sticky sections for tablets and larger screens */
 @media (min-width: 769px) {
+    /* Disable scroll-based animation for projects on larger screens */
+    .project-item.animate-in::before {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
     
-/* Parallax */
-.parallax-container {
-    position: relative;
-    height: 100vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    perspective: 10px;
-}
-
-/* Moving bike */
-#bike {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    transition: transform 0.05s linear;
-    transform: rotate(90deg);
-    z-index: 10;
-}
-
-#bike-track{
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 5px;
-    background-color: #a2faa3;
-    transition: height 0.05s linear;
-    z-index: 10;
-}
-
-#bike-icon {
-    font-size: 2rem;
-    color: #a2faa3;
-    transition: transform 0.05s linear;
-}
+    .project-item.animate-in h3,
+    .project-item.animate-in p {
+        opacity: 0;
+    }
+    
+    /* Enable hover-based animation instead */
+    .project-item:hover::before {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        backdrop-filter: blur(10px);
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .project-item:hover h3,
+    .project-item:hover p {
+        opacity: 1;
+        transition: all 0.5s ease-in-out;
+    }
 
     section, header {
         position: sticky;
@@ -883,12 +860,6 @@ footer{
 
     .about-image {
         width: 50%;
-        min-height: 27dvh;
-        padding: 0;
-        margin: 0;
-        background-position: 50% 23px;
-        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
-        -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%, 0% 0%);
     }
 
     #about p{
@@ -900,21 +871,76 @@ footer{
 
     .first-alinea{
         color: #050743 !important;
+        background-color: #e8e8e8;
     }
 
     .second-alinea{
         background-color: #050743;
     }
 
+    .third-alinea{
+        background-color: #a2faa3;
+        color: #050743 !important;
+    }
+
     .highlighted {
         width: 100%;
-        background-color: #e8e8e8;
         display: flex;
+        background-color: #e8e8e8;
+        align-items: center;
+        justify-items: center;
     }
 
     .non-highlighted{
         min-height: 50dvh;
         display: flex;
+    }
+
+    /* Skills Carousel */
+    .carousel-container{
+        background: #b799ff;
+    }
+
+    .carousel-slide {
+        background: #b799ff;
+    }
+
+    .slide-content h3 {
+        font-size: 2.5rem;
+        width: 50%;
+        margin: 1rem auto;
+    }
+
+    .slide-content p {
+        font-size: 1.5rem;
+        margin: 0 auto 2em auto;
+        line-height: 1.2;
+        width: 80%;
+    }
+
+    .skill-items {
+        width: 50%;
+    }
+
+    .skill-item {
+        background: #a2faa3;
+        border: 0px;
+    }
+
+    .skill-item i {
+        font-size: 2rem;
+        color: #050743 !important;
+    }
+
+    .skill-item span {
+        font-size: 1.2rem;
+        color: #050743;
+    }
+
+    /* Carousel Navigation */
+
+    .carousel-btn {
+        background: #b799ff;
     }
 
     .projects-list {
@@ -929,6 +955,14 @@ footer{
     .project-item {
         width: 100%;
         margin: 0;
+    }
+
+    /* Contact Section */
+    .contact-container {
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 2em 1em;
+        justify-items: center;
     }
 }
 
