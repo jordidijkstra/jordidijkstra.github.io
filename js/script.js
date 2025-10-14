@@ -16,11 +16,58 @@ document.addEventListener('DOMContentLoaded', function() {
         // Sluit menu wanneer er op een navigatielink wordt geklikt
         const navLinksElements = navLinks.querySelectorAll('a');
         navLinksElements.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
                 navLinks.classList.remove('open');
                 hamburger.classList.remove('open');
                 body.classList.remove('menu-open');
+                
+                // Handle sticky section navigation
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    navigateToSection(href);
+                }
             });
+        });
+    }
+    
+    // Sticky section navigation function
+    function navigateToSection(targetId) {
+        const targetSection = document.querySelector(targetId);
+        if (!targetSection) return;
+        
+        if (window.innerWidth >= 769) {
+            // For sticky sections on tablets/desktop
+            // Use a simple index-based approach for sticky sections
+            const sections = ['header', '#about', '#skills', '#projects', '#contact'];
+            const sectionIndex = sections.indexOf(targetId);
+            
+            if (sectionIndex !== -1) {
+                // Scroll to the section by calculating viewport heights
+                const scrollPosition = sectionIndex * window.innerHeight;
+                container.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            // Normal scroll for mobile
+            container.scrollTo({
+                top: targetSection.offsetTop - 60,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    // Add navigation to CTA button as well
+    const ctaButton = document.querySelector('.cta');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                navigateToSection(href);
+            }
         });
     }
     

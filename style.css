@@ -1,3 +1,4 @@
+/* #region Global styles */
 *{
     margin: 0;
     padding: 0;
@@ -17,8 +18,9 @@ body {
 body.menu-open {
     overflow-y: hidden;
 }
+/* #endregion */
 
-/* Menu balk */
+/* #region Menu balk */
 nav{
     background-color: #b799ff;
     width: 100%;
@@ -125,6 +127,7 @@ nav{
     pointer-events: auto;
     transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
 }
+/* #endregion */
 
 /* Parallax */
 .parallax-container {
@@ -135,7 +138,7 @@ nav{
     perspective: 10px;
 }
 
-/* Moving bike */
+/* #region Moving bike */
 #bike {
     position: fixed;
     top: 80px;
@@ -160,9 +163,9 @@ nav{
     color: #a2faa3;
     transition: transform 0.05s linear;
 }
+/* #endregion */
 
-/* Header */
-
+/* #region Header */
 header {
     position: relative;
     display: flex;
@@ -220,12 +223,9 @@ header {
     -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
     font-size: 1em;
 }
+/* #endregion */
 
-.cta:hover {
-    color: #00bcd4;
-}
-
-/* Sections */
+/* #region Sections */
 section {
     position: relative;
     z-index: 1;
@@ -262,7 +262,9 @@ section p {
     font-weight: 300;
     letter-spacing: 0.3px;
 }
+/* #endregion */
 
+/* #region About Section */
 .about-image {
     width: 100%;
     padding: 1em 0 ;
@@ -279,7 +281,9 @@ section p {
     padding-bottom: 3em;
     text-align: center;
 }
+/* #endregion */
 
+/* #region Skills Section */
 #skills {
     background-color: #b799ff;
     overflow: hidden;
@@ -360,7 +364,7 @@ section p {
 }
 
 .skill-item i {
-    font-size: 2.5em;
+    font-size: 2em;
     color: #e8e8e8;
 }
 
@@ -431,6 +435,9 @@ section p {
     background: rgba(162, 250, 163, 0.7);
 }
 
+/* #endregion */
+
+/* #region Projects Section */
 #projects{
     background-color: #050743;
     padding-bottom: 2em;
@@ -440,6 +447,7 @@ section p {
     padding: 0 1em;
 }
 
+/* #region Project Item */
 .project-item{
     background: linear-gradient(135deg, rgba(162, 250, 163, 0.1), rgba(183, 153, 255, 0.1));
     backdrop-filter: blur(10px);
@@ -629,6 +637,8 @@ section p {
     background-size: 300%;
 }
 
+/* #endregion */
+
 .joshuaenlyke{
     background-image: url('images/joshuaenlyke.png');
     background-size: cover;
@@ -653,6 +663,9 @@ section p {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* #endregion */
+
+/* #region Contact Section */
 #contact{
     background-color: #e26060;
 }
@@ -676,22 +689,14 @@ section p {
 
 #contact p{
     text-align: center;
+    padding: 0;
 }
 
 #contact h2{
     margin-bottom: 0;
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+
 
 /* Contact Section */
 .contact-container {
@@ -760,11 +765,13 @@ section p {
     letter-spacing: 1px;
 }
 
+/* #endregion */
+
 /* Footer */
 
 footer{
     background-color: #b799ff;
-    height: 100px;
+    height: 10dvh;
     text-align: center;
     display: flex;
     align-items: center;
@@ -775,34 +782,10 @@ footer{
     position: relative;
 }
 
-/* Responsive Design - Mobile First Approach */
+/* #regionResponsive Design - Mobile First Approach */
 
 /* Sticky sections for tablets and larger screens */
 @media (min-width: 769px) {
-    /* Disable scroll-based animation for projects on larger screens */
-    .project-item.animate-in::before {
-        opacity: 0;
-        backdrop-filter: blur(0px);
-    }
-    
-    .project-item.animate-in h3,
-    .project-item.animate-in p {
-        opacity: 0;
-    }
-    
-    /* Enable hover-based animation instead */
-    .project-item:hover::before {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-        backdrop-filter: blur(10px);
-        transition: all 0.5s ease-in-out;
-    }
-    
-    .project-item:hover h3,
-    .project-item:hover p {
-        opacity: 1;
-        transition: all 0.5s ease-in-out;
-    }
 
     section, header {
         position: sticky;
@@ -834,12 +817,6 @@ footer{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-
-    footer {
-        position: sticky;
-        top: calc(100dvh - 100px);
-        z-index: 1000;
     }
 
     .profile-image {
@@ -990,10 +967,35 @@ footer{
         margin: 0;
     }
 
+    /* Disable scroll-based animation for projects on larger screens */
+    .project-item.animate-in::before {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    
+    .project-item.animate-in h3,
+    .project-item.animate-in p {
+        opacity: 0;
+    }
+    
+    /* Enable hover-based animation instead */
+    .project-item:hover::before {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+        backdrop-filter: blur(10px);
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .project-item:hover h3,
+    .project-item:hover p {
+        opacity: 1;
+        transition: all 0.5s ease-in-out;
+    }
+
     /* Contact Section */
     #contact{
-        min-height: calc(100dvh - 100px);
-        max-height: calc(100dvh - 100px);
+        min-height: 90dvh;
+        max-height: 90dvh;
     }
 
     .contact-container {
@@ -1001,6 +1003,12 @@ footer{
         margin: 0 auto;
         padding: 2em 1em;
         justify-items: center;
+    }
+
+    footer {
+        position: sticky;
+        top: 90dvh;
+        z-index: 1000;
     }
 }
 
