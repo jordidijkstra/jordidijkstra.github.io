@@ -191,6 +191,48 @@ document.addEventListener('DOMContentLoaded', function() {
         dot.addEventListener('click', () => goToSlide(index));
     });
     
+    // Touch/Swipe functionality for mobile and tablet
+    let startX = 0;
+    let startY = 0;
+    let distX = 0;
+    let distY = 0;
+    let threshold = 50; // Minimum swipe distance
+    let restraint = 100; // Maximum vertical distance for horizontal swipe
+    
+    const carouselContainer = document.querySelector('.carousel-container');
+    
+    if (carouselContainer) {
+        // Touch start
+        carouselContainer.addEventListener('touchstart', function(e) {
+            const touchObj = e.changedTouches[0];
+            startX = touchObj.pageX;
+            startY = touchObj.pageY;
+        }, false);
+        
+        // Touch end
+        carouselContainer.addEventListener('touchend', function(e) {
+            const touchObj = e.changedTouches[0];
+            distX = touchObj.pageX - startX; // Horizontal distance
+            distY = touchObj.pageY - startY; // Vertical distance
+            
+            // Check if swipe is valid (horizontal and long enough)
+            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+                if (distX > 0) {
+                    // Swipe right - previous slide
+                    prevSlide();
+                } else {
+                    // Swipe left - next slide
+                    nextSlide();
+                }
+            }
+        }, false);
+        
+        // Prevent default touch behavior to avoid scrolling conflicts
+        carouselContainer.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    }
+    
     // Auto-play carousel
     let autoPlayInterval;
     
