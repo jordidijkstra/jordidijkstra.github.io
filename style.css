@@ -26,6 +26,7 @@ nav{
     width: 100%;
     position: fixed;
     z-index: 100;
+    border-bottom: 5px solid #a2faa3;
 }
 
 /* Logo */
@@ -287,12 +288,34 @@ section p {
 #skills {
     background-color: #b799ff;
     overflow: hidden;
+    height: 100dvh;
 }
 
 /* Skills Carousel */
 .skills-carousel {
     max-width: 100%;
-    position: relative;
+    position: sticky;
+    top: 60px;
+    z-index: 50;
+    background-color: #b799ff;
+}
+
+/* Swipe indicator for mobile/tablet */
+.skills-carousel::before {
+    content: '← Swipe →';
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1em;
+    font-weight: 500;
+    letter-spacing: 2px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 .carousel-container {
@@ -306,11 +329,11 @@ section p {
 .carousel-track {
     display: flex;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    width: 300%; /* 3 slides */
+    width: 500%; /* 5 slides (clone + 3 real + clone) */
 }
 
 .carousel-slide {
-    min-width: 33.333%;
+    min-width: 20%; /* 100% / 5 slides */
     background: #050743;
     backdrop-filter: blur(10px);
     padding: 3em 2em;
@@ -323,17 +346,18 @@ section p {
 }
 
 .slide-content h3 {
-    font-size: 2em;
+    font-size: 1.8em;
     margin-bottom: 0.5em;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .slide-content p {
-    font-size: 1.1em;
+    font-size: 1em;
     margin-bottom: 2em;
     padding: 0;
     color: #e8e8e8;
+    line-height: 1.4;
 }
 
 .skill-items {
@@ -377,7 +401,7 @@ section p {
 
 /* Carousel Navigation */
 .carousel-navigation {
-    display: flex;
+    display: none; /* Hidden on mobile by default */
     align-items: center;
     justify-content: center;
     gap: 2em;
@@ -907,6 +931,14 @@ footer{
     }
 
     /* Skills Carousel */
+    .skills-carousel::after {
+        display: none; /* Hide swipe indicator on desktop */
+    }
+
+    .carousel-navigation {
+        display: flex; /* Show buttons on desktop */
+    }
+
     .carousel-container{
         background: #b799ff;
     }

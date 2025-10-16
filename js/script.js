@@ -139,17 +139,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const dots = document.querySelectorAll('.dot');
     const slides = document.querySelectorAll('.carousel-slide');
     
-    let currentSlide = 0;
-    const totalSlides = slides.length;
+    let currentSlide = 1; // Start at index 1 (first real slide, after clone)
+    const totalSlides = slides.length; // 5 slides total (clone, 3 real, clone)
+    const realSlidesCount = 3; // Number of actual content slides
+    let isTransitioning = false;
     
-    function updateCarousel() {
+    function updateCarousel(instant = false) {
+        // Disable transition for instant jumps
+        if (instant) {
+            skillsTrack.style.transition = 'none';
+        } else {
+            skillsTrack.style.transition = 'transform 0.4s ease-in-out';
+        }
+        
         // Move track
         const translateX = -currentSlide * (100 / totalSlides);
         skillsTrack.style.transform = `translateX(${translateX}%)`;
         
-        // Update dots
+        // Update dots based on real slide index (0-2)
+        // Map carousel position to real slide: 0->2, 1->0, 2->1, 3->2, 4->0
+        let realIndex;
+        if (currentSlide === 0) {
+            realIndex = 2; // Clone of last slide
+        } else if (currentSlide === 4) {
+            realIndex = 0; // Clone of first slide
+        } else {
+            realIndex = currentSlide - 1; // Real slides are at indices 1, 2, 3
+        }
+        
         dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
+            dot.classList.toggle('active', index === realIndex);
         });
         
         // Update slides
@@ -157,30 +176,65 @@ document.addEventListener('DOMContentLoaded', function() {
             slide.classList.toggle('active', index === currentSlide);
         });
         
-        // Update button states
-        prevBtn.disabled = currentSlide === 0;
-        nextBtn.disabled = currentSlide === totalSlides - 1;
+        // Force reflow if instant
+        if (instant) {
+            skillsTrack.offsetHeight; // Trigger reflow
+        }
+        
+        // Update button states (always enabled for infinite)
+        prevBtn.disabled = false;
+        nextBtn.disabled = false;
     }
     
-   
-    
     function nextSlide() {
-        if (currentSlide < totalSlides - 1) {
-            currentSlide++;
-            updateCarousel();
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        currentSlide++;
+        updateCarousel(false);
+        
+        // Check if we reached the clone at the end
+        if (currentSlide === totalSlides - 1) {
+            // After transition ends, jump to the real first slide
+            setTimeout(() => {
+                currentSlide = 1;
+                updateCarousel(true);
+                isTransitioning = false;
+            }, 400); // Match transition duration
+        } else {
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 400);
         }
     }
     
     function prevSlide() {
-        if (currentSlide > 0) {
-            currentSlide--;
-            updateCarousel();
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        currentSlide--;
+        updateCarousel(false);
+        
+        // Check if we reached the clone at the beginning
+        if (currentSlide === 0) {
+            // After transition ends, jump to the real last slide
+            setTimeout(() => {
+                currentSlide = totalSlides - 2;
+                updateCarousel(true);
+                isTransitioning = false;
+            }, 400); // Match transition duration
+        } else {
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 400);
         }
     }
     
     function goToSlide(slideIndex) {
-        currentSlide = slideIndex;
-        updateCarousel();
+        if (isTransitioning) return;
+        // Map real slide index (0-2) to carousel index (1-3)
+        currentSlide = slideIndex + 1;
+        updateCarousel(false);
     }
     
     // Event listeners
@@ -231,34 +285,6 @@ document.addEventListener('DOMContentLoaded', function() {
         carouselContainer.addEventListener('touchmove', function(e) {
             e.preventDefault();
         }, { passive: false });
-    }
-    
-    // Auto-play carousel
-    let autoPlayInterval;
-    
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(() => {
-            if (currentSlide < totalSlides - 1) {
-                nextSlide();
-            } else {
-                currentSlide = 0;
-                updateCarousel();
-            }
-        }, 5000); // Change slide every 5 seconds
-    }
-    
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-    
-    // Pause auto-play on hover
-    const carousel = document.querySelector('.skills-carousel');
-    if (carousel) {
-        carousel.addEventListener('mouseenter', stopAutoPlay);
-        carousel.addEventListener('mouseleave', startAutoPlay);
-        
-        // Start auto-play initially
-        startAutoPlay();
     }
     
     // Keyboard navigation
