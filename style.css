@@ -18,6 +18,25 @@ body {
 body.menu-open {
     overflow-y: hidden;
 }
+
+/* Hide default scrollbar - bike animation serves as scroll indicator */
+::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: none;
+}
 /* #endregion */
 
 /* #region Menu balk */
@@ -26,10 +45,25 @@ nav{
     width: 100%;
     position: fixed;
     z-index: 100;
-    border-bottom: 5px solid #a2faa3;
+    border-bottom: 5px solid #e8e8e8;
 }
 
 /* Logo */
+.border-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 70px;
+    background-color: #e8e8e8;
+    /* Snijd linker bovenhoek en rechter onderhoek recht af */
+    clip-path: polygon(20% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%, 0% 20%);
+    -webkit-clip-path: polygon(20% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%, 0% 20%);
+    position: relative;
+    left: calc(50% - 35px);
+    top: 35px;
+    z-index: 10;
+}
 
 .logo-container {
     display: flex;
@@ -42,9 +76,7 @@ nav{
     clip-path: polygon(20% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%, 0% 20%);
     -webkit-clip-path: polygon(20% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%, 0% 20%);
     padding: 0.5em;
-    position: relative;
-    left: calc(50% - 30px);
-    top: 30px;
+    z-index: 11;
 }
 
 .logo-container a{
@@ -60,12 +92,12 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 10;
+    z-index: 13;
     position: absolute;
     right: 5px;
     top: 0;
@@ -94,7 +126,7 @@ nav{
     width: 100vw;
     height: 100dvh;
     background-color: #b799ff;
-    z-index: 9;
+    z-index: 12;
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
     pointer-events: none;
@@ -143,16 +175,16 @@ nav{
 #bike {
     position: fixed;
     top: 80px;
-    left: 0;
+    right: 0;
     transition: transform 0.05s linear;
-    transform: rotate(90deg);
+    transform: rotate(90deg) scaleY(-1);
     z-index: 10;
 }
 
 #bike-track{
     position: fixed;
-    top: 60px;
-    left: 0;
+    top: 70px;
+    right: 0;
     width: 5px;
     background-color: #a2faa3;
     transition: height 0.05s linear;
@@ -223,6 +255,13 @@ header {
     clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
     -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
     font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.cta i {
+    display: inline-block;
+    margin-left: 0.5em;
+    transition: transform 0.3s ease;
 }
 /* #endregion */
 
@@ -380,11 +419,6 @@ section p {
     justify-content: center;
     text-align: center;
     gap: 1em;
-}
-
-.skill-item:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
 }
 
 .skill-item i {
@@ -813,19 +847,19 @@ footer{
 
     section, header {
         position: sticky;
-        top: 0;
-        height: 100dvh;
+        top: 70px; /* Stop below the navbar */
+        height: 100dvh; 
         max-height: 100dvh;
         z-index: 1;
         padding: 0;
     }
 
     .section-header h2{
-        margin: 0;
+        margin-bottom: 2rem;
     }
 
     .section-header{
-        min-height: 20dvh;
+        min-height: 15dvh;
         max-height: 20dvh;
         display: flex;
         justify-content: center;
@@ -834,7 +868,7 @@ footer{
 
     .about-content,.skills-carousel, .projects-lists, .contact-container {
         min-height: 50dvh;
-        max-height: 80dvh;
+        max-height: 85dvh;
         overflow-y: hidden;
         padding: 0;
         display: flex;
@@ -888,18 +922,22 @@ footer{
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
-        padding: 2em 0;
     }
 
     .about-image {
         width: 50%;
     }
 
+    .about-image img {
+        width: 90%;
+        height: auto;
+    }
+
     #about p{
         width: 50%;
         margin: 0;
         text-align: left;
-        font-size: 1.2em;
+        font-size: 1.2rem;
         line-height: 1.5;
     }
 
@@ -926,42 +964,67 @@ footer{
     }
 
     .non-highlighted{
-        min-height: 50dvh;
+        min-height: 55dvh;
         display: flex;
     }
 
-    /* Skills Carousel */
-    .skills-carousel::after {
-        display: none; /* Hide swipe indicator on desktop */
+    .skills-carousel {
+        background-color: #050743;
     }
 
-    .carousel-navigation {
-        display: flex; /* Show buttons on desktop */
+    /* Carousel with partial slides visible on tablet */
+    .carousel-container {
+        overflow: visible;
+        max-width: 60%;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: transparent;
+        position: relative;
     }
-
-    .carousel-container{
-        background: #b799ff;
+    
+    .carousel-track {
+        width: 500%;
     }
 
     .carousel-slide {
+        min-width: 20%;
         background: #b799ff;
+        padding: 1.5em;
+        border-radius: 20px;
+        opacity: 0.3;
+        transform: scale(0.85);
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .carousel-slide.active {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+
+    .carousel-slide.clone {
+        display: block;
     }
 
     .slide-content h3 {
-        font-size: 2.5rem;
-        width: 50%;
-        margin: 1rem auto;
+        font-size: 2rem;
+        width: 70%;
+        margin: 0 auto;
+        padding: 0.5em;
     }
 
     .slide-content p {
-        font-size: 1.5rem;
-        margin: 0 auto 2em auto;
+        font-size: 1.2rem;
+        margin: 0 auto;
         line-height: 1.2;
-        width: 80%;
+        width: 70%;
+        padding: 1em;
     }
 
     .skill-items {
-        width: 50%;
+        width: 60%;
     }
 
     .skill-item {
@@ -977,12 +1040,6 @@ footer{
     .skill-item span {
         font-size: 1.2rem;
         color: #050743;
-    }
-
-    /* Carousel Navigation */
-
-    .carousel-btn {
-        background: #b799ff;
     }
 
     .projects-list {
@@ -1045,19 +1102,207 @@ footer{
 }
 
 /* Large screens - better grid */
-@media (min-width: 1025px) {
-    .projects-list {
+@media (min-width: 1000px) {
+    /* Desktop Navigation */
+    .hamburger {
+        display: none; /* Hide hamburger menu on desktop */
+    }
+
+    /* Show logo on desktop */
+    .border-container {
+        display: flex;
+        position: absolute;
+        left: 2em;
+        top: 0;
+    }
+
+    .nav-links {
+        position: absolute;
+        width: 80%;
+        height: calc(50px + 1rem);
+        background-color: transparent;
+        transform: none;
+        pointer-events: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1em;
+    }
+
+    .nav-links li {
+        margin: 0;
+        width: 15vw;
+        padding: 0;
+        z-index: 0;
+        clip-path: none;
+        -webkit-clip-path: none;
+        background-color: transparent;
+    }
+
+    .nav-links li.active a, .nav-links li a:hover  {
+        color: #050743;
+        background-color: #a2faa3;
+        padding: .5rem 1rem;
+        border-radius: 50px;
+        transition: color 0.5s ease, background-color 0.5s ease;
+    }
+
+    /* Hide Home link on desktop (logo replaces it) */
+    .nav-links li:first-child {
+        display: none;
+    }
+
+    .nav-links a {
+        font-size: 1em;
+        color: #e8e8e8;
+    }
+
+    nav{
+        background-color: #b799ff;
+        width: 100%;
+        position: fixed;
+        border-bottom: 5px solid #e8e8e8;
+        padding: .5rem 0;
+    }
+
+    /* Logo */
+    .border-container{
+        height: 50px;
+        width: 50px;
+        position: relative;
+        left: 0.5rem;
+    }
+
+    .logo-container {
+        height: 40px;
+        width: 40px;
+    }
+
+    .logo-container a{
+        font-size: 0.9rem;
+    }
+
+    .profile-image {
+        left: 10%;
+    }
+
+    .cta:hover{
+        color: #e26060;
+    }
+
+    .cta:hover i {
+        animation: bounce 0.6s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(5px);
+        }
+    }
+
+    .highlighted{
+        padding-left: 3em;
+    }
+
+    .about-image {
+        width: calc(20% + 6em);
+    }
+
+    .about-image img {
+        width: 50%;
+        height: auto;
+    }
+
+    #about p{
+        width: 70%;
+        margin: 0;
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* Swipe indicator for mobile/tablet */
+    .skills-carousel::before {
+        display: none;
+    }
+
+    /* Disable carousel, show 3-column grid instead */
+    .carousel-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 2em;
-        padding: 0 2em;
-        max-width: 1200px;
+        overflow: visible;
+        max-width: 90vw;
+    }
+    
+    .carousel-track {
+        display: contents; /* Make track transparent for grid */
+    }
+
+    .carousel-slide {
+        min-width: auto;
+        width: 100%;
+        padding: 2em;
+        background: #b799ff;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        transform: none !important; /* Disable carousel transforms */
+        opacity: 1 !important; /* All slides fully visible */
+    }
+    
+    .carousel-slide.clone {
+        display: none; /* Hide clone slides on desktop */
+    }
+    
+    .carousel-slide .slide-content {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Hide carousel navigation elements */
+    .carousel-dots {
+        display: none;
+    }
+
+    .slide-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .slide-content p {
+        font-size: 0.8rem;
+    }
+
+    .skill-item i {
+        font-size: 1.5rem;
+    }
+
+    .skill-item span {
+        font-size: 0.8rem;
+    }
+
+    .projects-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        padding: 0 1em;
+        max-width: 80vw;
         margin: 0 auto;
     }
     
     .project-item {
-        width: 100%;
+        width: calc(80vw / 3 - 1.5em);
         margin: 0;
+    }
+
+    .project-item h3{
+        font-size: 1.2rem;
+    }
+
+    .project-item p{
+        font-size: 0.9rem;
     }
 }
 

@@ -85,6 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
         item.style.cursor = 'pointer';
     });
     
+    let lastScrollTop = 0;
+    
     function moveBike() {
         const scrollTop = container.scrollTop;
         const footer = document.querySelector('footer');
@@ -94,12 +96,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const scrollPercent = Math.min(scrollTop / docHeight, 1);
         // maximale verplaatsing: container hoogte - bike hoogte - start offset - footer
         const bikeHeight = bike.offsetHeight;
-        const startOffset = 60;
+        const startOffset = 75;
         const maxTop = container.clientHeight - bikeHeight - startOffset - footerHeight;
         // positie fiets op basis van scrollpercentage
         const bikeTop = startOffset + scrollPercent * maxTop;
         bike.style.top = `${bikeTop}px`;
-        bikeTrack.style.height = `${bikeTop-18}px`;
+        bikeTrack.style.height = `${bikeTop-28}px`;
+        
+        // Detecteer scroll richting en draai de fiets
+        if (scrollTop === 0) {
+            // Top van de pagina - fiets wijst naar beneden
+            bike.style.transform = 'rotate(90deg) scaleY(-1)';
+        } else if (scrollTop >= docHeight) {
+            // Bottom van de pagina - fiets wijst naar boven
+            bike.style.transform = 'rotate(270deg) scaleY(1)';
+        } else if (scrollTop > lastScrollTop) {
+            // Scroll naar beneden - fiets wijst naar beneden
+            bike.style.transform = 'rotate(90deg) scaleY(-1)';
+        } else if (scrollTop < lastScrollTop) {
+            // Scroll naar boven - fiets wijst naar boven
+            bike.style.transform = 'rotate(270deg) scaleY(1)';
+        }
+        lastScrollTop = scrollTop;
         
         // Check welke projecten geanimeerd moeten worden op basis van fiets positie
         checkProjectAnimations(bikeTop);
@@ -132,10 +150,56 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', moveBike);
     moveBike();
     
+    // Update active navigation link based on scroll position
+    function updateActiveNavLink() {
+        const sections = document.querySelectorAll('section, header');
+        const navItems = document.querySelectorAll('.nav-links li');
+        
+        
+        let currentSection = 'home';
+        
+        // Loop through sections from top to bottom
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            const scrollPosition = container.scrollTop + sectionHeight; // Small offset from top
+            
+            // If we've scrolled past the start of this section
+            if (scrollPosition >= sectionTop) {
+                // Check if it's header or get the id
+                if (section.tagName.toLowerCase() === 'header') {
+                    currentSection = 'home';
+                } else {
+                    const sectionId = section.getAttribute('id');
+                    if (sectionId) {
+                        currentSection = sectionId;
+                    }
+                }
+            }
+        });
+        
+        // Update active class on nav items
+        navItems.forEach(item => {
+            const link = item.querySelector('a');
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            
+            item.classList.remove('active');
+            
+            // Match the current section
+            if ((href === '#' && currentSection === 'home') || href === '#' + currentSection) {
+                item.classList.add('active');
+            }
+        });
+    }
+    
+    container.addEventListener('scroll', updateActiveNavLink);
+    updateActiveNavLink(); // Initial call
+    
     // Skills Carousel Functionality
     const skillsTrack = document.getElementById('skillsTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
     const dots = document.querySelectorAll('.dot');
     const slides = document.querySelectorAll('.carousel-slide');
     
@@ -180,10 +244,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (instant) {
             skillsTrack.offsetHeight; // Trigger reflow
         }
-        
-        // Update button states (always enabled for infinite)
-        prevBtn.disabled = false;
-        nextBtn.disabled = false;
     }
     
     function nextSlide() {
@@ -193,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSlide++;
         updateCarousel(false);
         
-        // Check if we reached the clone at the end
+        // Check if we reached the clone at the end (index 4 = clone of first slide)
         if (currentSlide === totalSlides - 1) {
             // After transition ends, jump to the real first slide
             setTimeout(() => {
@@ -215,11 +275,11 @@ document.addEventListener('DOMContentLoaded', function() {
         currentSlide--;
         updateCarousel(false);
         
-        // Check if we reached the clone at the beginning
+        // Check if we reached the clone at the beginning (index 0 = clone of last slide)
         if (currentSlide === 0) {
-            // After transition ends, jump to the real last slide
+            // After transition ends, jump to the real last slide (index 3)
             setTimeout(() => {
-                currentSlide = totalSlides - 2;
+                currentSlide = 3;
                 updateCarousel(true);
                 isTransitioning = false;
             }, 400); // Match transition duration
@@ -237,10 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCarousel(false);
     }
     
-    // Event listeners
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-    
+    // Event listeners for dots
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => goToSlide(index));
     });
