@@ -2,16 +2,27 @@
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const menuOverlay = document.querySelector('.menu-overlay');
     const container = document.querySelector('.parallax-container');
     const bike = document.getElementById('bike');
     const bikeTrack = document.getElementById('bike-track');
     const body = document.body;
+    
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', function() {
             navLinks.classList.toggle('open');
             hamburger.classList.toggle('open');
             body.classList.toggle('menu-open', navLinks.classList.contains('open'));
         });
+        
+        // Close menu when clicking overlay
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', function() {
+                navLinks.classList.remove('open');
+                hamburger.classList.remove('open');
+                body.classList.remove('menu-open');
+            });
+        }
         
         // Sluit menu wanneer er op een navigatielink wordt geklikt
         const navLinksElements = navLinks.querySelectorAll('a');

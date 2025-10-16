@@ -19,6 +19,26 @@ body.menu-open {
     overflow-y: hidden;
 }
 
+/* Menu overlay - blocks interaction when menu is open */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 7, 67, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 11;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+body.menu-open .menu-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 /* Hide default scrollbar - bike animation serves as scroll indicator */
 ::-webkit-scrollbar {
     width: 0px;
@@ -43,9 +63,32 @@ body.menu-open {
 nav{
     background-color: #b799ff;
     width: 100%;
+    height: 70px;
     position: fixed;
     z-index: 100;
     border-bottom: 5px solid #e8e8e8;
+}
+
+/* Add overlay effect to nav when menu is open on tablet */
+@media (min-width: 769px) and (max-width: 999px) {
+    body.menu-open nav::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(5, 7, 67, 0.7);
+        backdrop-filter: blur(5px);
+        pointer-events: none;
+        z-index: 1;
+    }
+    
+    body.menu-open .border-container,
+    body.menu-open .hamburger {
+        position: relative;
+        z-index: 2;
+    }
 }
 
 /* Logo */
@@ -98,7 +141,7 @@ nav{
     border: none;
     cursor: pointer;
     z-index: 13;
-    position: absolute;
+    position: fixed;
     right: 5px;
     top: 0;
 }
@@ -108,15 +151,17 @@ nav{
     display: none;
     pointer-events: none;
 }
+
 .hamburger .fa-bars {
     display: inline;
 }
+
 .hamburger.open .fa-bars {
     display: none;
 }
+
 .hamburger.open .fa-xmark {
     display: inline;
-    position: fixed;
 }
 
 .nav-links {
@@ -134,12 +179,13 @@ nav{
 }
 
 .nav-links li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     list-style: none;
-    margin: 3rem auto;
-    text-transform: uppercase;
+    height: calc((100dvh / 5) - 4em);
     background-color: #a2faa3;
-    width: 80%;
-    padding: 2em 1em;
+    margin: 2em 1em;
     clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
     -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
 }
@@ -153,6 +199,9 @@ nav{
     font-size: 1.5em;
     font-weight: bold;
     color: #050743;
+    text-transform: uppercase;
+    width: 80%;
+    
 }
 
 .nav-links.open {
@@ -326,8 +375,6 @@ section p {
 /* #region Skills Section */
 #skills {
     background-color: #b799ff;
-    overflow: hidden;
-    height: 100dvh;
 }
 
 /* Skills Carousel */
@@ -337,6 +384,7 @@ section p {
     top: 60px;
     z-index: 50;
     background-color: #b799ff;
+    padding: 2em 0;
 }
 
 /* Swipe indicator for mobile/tablet */
@@ -844,6 +892,27 @@ footer{
 
 /* Sticky sections for tablets and larger screens */
 @media (min-width: 769px) {
+    
+    /* Tablet menu: half screen width with overlay */
+    .nav-links {
+        width: 60vw;
+        right: 0;
+        border-left: 5px solid #e8e8e8;
+    }
+    
+    .nav-links li {
+        margin: 2em 2em;
+    }
+    
+    /* Keep hamburger in same position when menu opens on tablet */
+    .hamburger.open {
+        right: calc(60vw - 65px); /* Position hamburger inside the menu */
+        transition: right 0.4s cubic-bezier(0.77,0,0.175,1);
+    }
+    
+    .hamburger {
+        transition: right 0.4s cubic-bezier(0.77,0,0.175,1);
+    }
 
     section, header {
         position: sticky;
