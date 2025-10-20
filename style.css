@@ -1123,12 +1123,14 @@ footer{
         display: none; /* Hide hamburger menu on desktop */
     }
 
+
     /* Show logo on desktop */
     .border-container {
         display: flex;
         position: absolute;
         left: 2em;
         top: 0;
+        background-color: #a2faa3;
     }
 
     .nav-links {
