@@ -114,6 +114,15 @@ document.addEventListener('DOMContentLoaded', function() {
         bike.style.top = `${bikeTop}px`;
         bikeTrack.style.height = `${bikeTop-28}px`;
         
+        // Fade out header-content on scroll
+        const headerContent = document.querySelector('.header-content');
+        if (headerContent) {
+            // Fade out over first 300px of scroll
+            const fadeDistance = 300;
+            const opacity = Math.max(0, 1 - (scrollTop / fadeDistance));
+            headerContent.style.opacity = opacity;
+        }
+        
         // Detecteer scroll richting en draai de fiets
         if (scrollTop === 0) {
             // Top van de pagina - fiets wijst naar beneden
@@ -174,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
 
-            const scrollPosition = container.scrollTop + sectionHeight; // Small offset from top
+            const scrollPosition = container.scrollTop + (sectionHeight - 50); // Small offset from top
             
             // If we've scrolled past the start of this section
             if (scrollPosition >= sectionTop) {

@@ -279,6 +279,7 @@ header {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    transition: opacity 0.3s ease;
 }
 
 .header-content h1{
@@ -305,12 +306,6 @@ header {
     -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 80%, 90% 100%, 0% 100%, 0% 20%);
     font-size: 1em;
     transition: all 0.3s ease;
-}
-
-.cta i {
-    display: inline-block;
-    margin-left: 0.5em;
-    transition: transform 0.3s ease;
 }
 /* #endregion */
 
@@ -481,66 +476,6 @@ section p {
     font-size: 0.9em;
 }
 
-/* Carousel Navigation */
-.carousel-navigation {
-    display: none; /* Hidden on mobile by default */
-    align-items: center;
-    justify-content: center;
-    gap: 2em;
-    margin: 2em 0;
-}
-
-.carousel-btn {
-    background: #050743;
-    color: #e8e8e8;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-btn:hover {
-    background: linear-gradient(135deg, #667eea, #050743);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.carousel-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.carousel-dots {
-    display: flex;
-    gap: 1em;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dot.active {
-    background: #a2faa3;
-    transform: scale(1.3);
-}
-
-.dot:hover {
-    background: rgba(162, 250, 163, 0.7);
-}
-
 /* #endregion */
 
 /* #region Projects Section */
@@ -556,11 +491,11 @@ section p {
 /* #region Project Item */
 .project-item{
     background: linear-gradient(135deg, rgba(162, 250, 163, 0.1), rgba(183, 153, 255, 0.1));
+    background-size: 100%;
     backdrop-filter: blur(10px);
     clip-path: polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%);
     -webkit-clip-path: polygon(10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%, 0% 10%);
     padding: 2em;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: 80%;
     aspect-ratio: 1/1;
     margin: 1.5em auto;
@@ -574,9 +509,11 @@ section p {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    opacity: 1;
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.3),
         0 2px 8px rgba(162, 250, 163, 0.1);
+    transition: background-size 0.5s ease, box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .project-item::before {
@@ -593,9 +530,6 @@ section p {
 }
 
 /* Scroll animation states */
-.project-item {
-    opacity: 1;
-}
 
 .project-item.animate-in::before {
     opacity: 1;
@@ -615,6 +549,7 @@ section p {
         0 8px 20px rgba(183, 153, 255, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.2);
     border-color: rgba(183, 153, 255, 0.3);
+    background-size: 300%;
 }
 
 /* Touch-friendly effects for mobile */
@@ -737,36 +672,58 @@ section p {
     z-index: 1;
 }
 
-.project-item:hover,
 .project-item:focus-within,
 .project-item:active {
     background-size: 300%;
+    transition: background-size 0.5s ease;
 }
 
 /* #endregion */
 
-.joshuaenlyke{
-    background-image: url('images/joshuaenlyke.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: all 0.4s ease;
+.joshuaenlyke,
+.codepen {
     position: relative;
     overflow: hidden;
     /* Maak het element focusbaar voor mobile */
     -webkit-tap-highlight-color: transparent;
 }
 
-.codepen{
+.joshuaenlyke::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/joshuaenlyke.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.joshuaenlyke:hover::after {
+    transform: scale(1.2);
+}
+
+.codepen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('images/cssLoadingAnimations.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    /* Maak het element focusbaar voor mobile */
-    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.5s ease;
+    z-index: 0;
+}
+
+.codepen:hover::after {
+    transform: scale(1.2);
 }
 
 /* #endregion */
@@ -995,6 +952,7 @@ footer{
 
     .about-image {
         width: 50%;
+        background-color: #e8e8e8;
     }
 
     .about-image img {
@@ -1010,24 +968,10 @@ footer{
         line-height: 1.5;
     }
 
-    .first-alinea{
-        color: #050743 !important;
-        background-color: #e8e8e8;
-    }
-
-    .second-alinea{
-        background-color: #050743;
-    }
-
-    .third-alinea{
-        background-color: #a2faa3;
-        color: #050743 !important;
-    }
-
     .highlighted {
         width: 100%;
         display: flex;
-        background-color: #e8e8e8;
+        background-color: #b799ff;
         align-items: center;
         justify-items: center;
     }
@@ -1039,6 +983,8 @@ footer{
 
     .skills-carousel {
         background-color: #050743;
+        max-width: 80%;
+        margin: 0 auto;
     }
 
     /* Carousel with partial slides visible on tablet */
@@ -1187,6 +1133,7 @@ footer{
 
     .nav-links {
         position: absolute;
+        margin: 0 auto;
         width: 80%;
         height: calc(50px + 1rem);
         background-color: transparent;
@@ -1196,11 +1143,12 @@ footer{
         flex-direction: row;
         align-items: center;
         gap: 1em;
+        border: none;
     }
 
     .nav-links li {
         margin: 0;
-        width: 15vw;
+        width: 25%;
         padding: 0;
         z-index: 0;
         clip-path: none;
@@ -1259,43 +1207,50 @@ footer{
         color: #e26060;
     }
 
-    .cta:hover i {
-        animation: bounce 0.6s ease-in-out infinite;
+    #about{
+        width: 50%;
+        left: 50%;
+        background-color: #050743;
     }
 
-    @keyframes bounce {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(5px);
-        }
+    .about-content {
+        display: block;
     }
 
-    .highlighted{
-        padding-left: 3em;
+    .highlighted {
+        background-color: #050743;
+        width: 100%;
+    }
+
+    .non-highlighted{
+        display: block;
+        width: 100%;
     }
 
     .about-image {
-        width: calc(20% + 6em);
-    }
-
-    .about-image img {
-        width: 50%;
-        height: auto;
+        display: none;
     }
 
     #about p{
-        width: 70%;
+        width: 100%;
         margin: 0;
         text-align: left;
-        font-size: 1rem;
+        font-size: 0.9rem;
         line-height: 1.5;
+        padding: 0.5em 2.5em 0.5em 0;
+    }
+
+    #skills{
+        background-color: #b799ff;
     }
 
     /* Swipe indicator for mobile/tablet */
     .skills-carousel::before {
         display: none;
+    }
+
+    .skills-carousel{
+        background-color: #b799ff;
     }
 
     /* Disable carousel, show 3-column grid instead */
@@ -1315,7 +1270,7 @@ footer{
         min-width: auto;
         width: 100%;
         padding: 2em;
-        background: #b799ff;
+        background: #050743;
         border-radius: 20px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         transform: none !important; /* Disable carousel transforms */
@@ -1332,16 +1287,19 @@ footer{
     }
     
     /* Hide carousel navigation elements */
-    .carousel-dots {
-        display: none;
-    }
 
     .slide-content h3 {
         font-size: 1.5rem;
+        width: 100%;
     }
 
     .slide-content p {
         font-size: 0.8rem;
+        width: 100%;
+    }
+
+    .skill-items {
+        width: 80%;
     }
 
     .skill-item i {
@@ -1352,17 +1310,21 @@ footer{
         font-size: 0.8rem;
     }
 
+    #projects{
+        background-color: #050743;
+    }
+
     .projects-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 1em;
+        justify-content: space-evenly;
         padding: 0 1em;
-        max-width: 80vw;
+        max-width: 70vw;
         margin: 0 auto;
     }
     
     .project-item {
-        width: calc(80vw / 3 - 1.5em);
+        width: 30%;
         margin: 0;
     }
 
