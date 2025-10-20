@@ -114,13 +114,16 @@ document.addEventListener('DOMContentLoaded', function() {
         bike.style.top = `${bikeTop}px`;
         bikeTrack.style.height = `${bikeTop-28}px`;
         
-        // Fade out header-content on scroll
+        // Fade out header-content on scroll (only on desktop > 999px)
         const headerContent = document.querySelector('.header-content');
-        if (headerContent) {
+        if (headerContent && window.innerWidth > 999) {
             // Fade out over first 300px of scroll
             const fadeDistance = 300;
             const opacity = Math.max(0, 1 - (scrollTop / fadeDistance));
             headerContent.style.opacity = opacity;
+        } else if (headerContent && window.innerWidth <= 999) {
+            // Reset opacity for mobile/tablet
+            headerContent.style.opacity = 1;
         }
         
         // Detecteer scroll richting en draai de fiets
